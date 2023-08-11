@@ -38,7 +38,12 @@ async function GetShowDetails(show) {
     const details = response.data[0];
 
     const showName = details.show.name;
-    const showImage = details.show.image.medium;
+    let showImage;
+    if (details.show.image) {
+        showImage = details.show.image.medium;
+    } else {
+        showImage = "images/placeholder.png";
+    }
     const showStatus = details.show.status;
     const showEpNum = details.show.runtime;
     const showRating = details.show.rating.average;
