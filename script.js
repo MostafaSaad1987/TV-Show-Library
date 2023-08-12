@@ -46,7 +46,7 @@ async function GetShowDetails(show) {
     if (details.show.image) {
         showImage = details.show.image.medium;
     } else {
-        showImage = "images/placeholder.png";
+        showImage = "./images/placeholder.png";
     }
     const showStatus = details.show.status;
     const showEpNum = details.show.runtime;
@@ -59,6 +59,11 @@ async function GetShowDetails(show) {
 function CreateCard(title, image, status, num, score, year) {
     const newCard = document.createElement("div");
     newCard.classList.add("card");
+
+    const removeButton = document.createElement("button");
+    removeButton.classList.add("remove-button");
+    removeButton.innerText = "Remove";
+    newCard.append(removeButton);
 
     const newTitle = document.createElement("p");
     newTitle.textContent = title;
@@ -101,6 +106,10 @@ document.body.addEventListener("click", (e) => {
     if (e.target.classList.contains("result")) {
         GetShowDetails(e.target.innerText);
         ClearResults();
+    }
+
+    if (e.target.classList.contains("remove-button")) {
+        e.target.parentElement.remove();
     }
 });
 
