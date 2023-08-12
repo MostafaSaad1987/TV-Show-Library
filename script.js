@@ -9,13 +9,17 @@ let timer;
 
 const waitTime = 1250;
 
-searchBar.addEventListener('keyup', () => {
+searchBar.addEventListener('keyup', SearchTimeout);
+searchBar.addEventListener("focus", SearchTimeout);
+
+function SearchTimeout() {
     clearTimeout(timer);
 
     timer = setTimeout(() => {
         Search();
     }, waitTime);
-});
+}
+
 
 async function Search() {
     let userSearch = searchBar.value;
