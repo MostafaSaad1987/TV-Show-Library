@@ -90,6 +90,51 @@ function CreateCard(title, image, status, num, score, year) {
     newDate.textContent = year;
     newCard.append(newDate);
 
+    if (newNum.textContent != "") {
+        newCard.append(document.createElement("br"));
+
+        const watchedLabel = document.createElement("label");
+        watchedLabel.htmlFor = "watched";
+        watchedLabel.innerText = "Progress";
+
+        const watchIndicator = document.createElement("input");
+        watchIndicator.type = "range";
+        watchIndicator.classList.add("watched");
+        watchIndicator.name = "watched";
+        watchIndicator.min = 0;
+        watchIndicator.max = parseInt(newNum.textContent);
+        watchIndicator.value = 0;
+
+        newCard.append(watchedLabel);
+        newCard.append(watchIndicator);
+
+        const watchContainer = document.createElement("p");
+        watchContainer.classList.add("watch-container");
+
+        const epWatchCount = document.createElement("span");
+        epWatchCount.classList.add("ep-watch-count");
+        epWatchCount.textContent = 0;
+
+        const epCount = document.createElement("span");
+        epCount.classList.add("ep-count");
+        epCount.textContent = parseInt(newNum.textContent);
+
+        watchContainer.append(epWatchCount, " / ", epCount);
+
+        newCard.append(watchContainer);
+
+        const increaseButton = document.createElement("button");
+        increaseButton.classList.add("increase");
+        increaseButton.innerHTML = "+";
+
+
+        const decreaseButton = document.createElement("button");
+        decreaseButton.classList.add("decrease");
+        decreaseButton.innerHTML = "-";
+
+        newCard.append(increaseButton, decreaseButton);
+    }
+
     cardContainer.append(newCard);
 }
 
@@ -110,6 +155,43 @@ document.body.addEventListener("click", (e) => {
 
     if (e.target.classList.contains("remove-button")) {
         e.target.parentElement.remove();
+    }
+
+    if (e.target.classList.contains("increase")) {
+        const progressBar = e.target.parentElement.querySelector(".watched");
+        const watched = e.target.parentElement.querySelector(".ep-watch-count");
+
+        progressBar.value++;
+        watched.textContent = parseInt(progressBar.value);
+
+        if (watched.textContent == progressBar.getAttribute("max")) {
+            watched.style.color = "green";
+        }
+    }
+
+    if (e.target.classList.contains("decrease")) {
+        const progressBar = e.target.parentElement.querySelector(".watched");
+        const watched = e.target.parentElement.querySelector(".ep-watch-count");
+
+        progressBar.value--;
+        watched.textContent = parseInt(progressBar.value);
+
+        watched.style.color = "black";
+    }
+});
+
+document.body.addEventListener("input", (e) => {
+    if (e.target.classList.contains("watched")) {
+        const watchedNum = e.target.parentElement.querySelector(".ep-watch-count");
+        const maxEp = e.target.parentElement.querySelector(".ep-count");
+
+        watchedNum.textContent = e.target.value;
+
+        if (watchedNum.textContent == maxEp.textContent) {
+            watchedNum.style.color = "green";
+        } else {
+            watchedNum.style.color = "black";
+        }
     }
 });
 
