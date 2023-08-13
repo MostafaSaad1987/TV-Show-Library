@@ -20,7 +20,6 @@ function SearchTimeout() {
     }, waitTime);
 }
 
-
 async function Search() {
     let userSearch = searchBar.value;
     const parameters = { params: { q: userSearch } };
@@ -136,6 +135,8 @@ function CreateCard(title, image, status, num, score, year) {
     }
 
     cardContainer.append(newCard);
+
+    SaveCards();
 }
 
 const searchBarResults = document.querySelector("#search-results");
@@ -178,10 +179,14 @@ document.body.addEventListener("click", (e) => {
 
         watched.style.color = "black";
     }
+
+    SaveCards();
 });
 
 document.body.addEventListener("input", (e) => {
     if (e.target.classList.contains("watched")) {
+        e.target.value = e.target.value;
+
         const watchedNum = e.target.parentElement.querySelector(".ep-watch-count");
         const maxEp = e.target.parentElement.querySelector(".ep-count");
 
@@ -197,4 +202,24 @@ document.body.addEventListener("input", (e) => {
 
 function ClearResults() {
     searchBarResults.innerText = "";
+}
+
+
+// Trying to implement saving using local storage.
+function SaveCards() {
+    localStorage.setItem("cards", cardContainer.innerHTML);
+    console.log(cardContainer);
+}
+
+let savedCards = localStorage.getItem("cards");
+
+if (savedCards) {
+    cardContainer.innerHTML = savedCards;
+
+    // Range inputs weren't working properly, so I had to change them manually after loading.
+    let progressBar = document.querySelectorAll(".watched");
+    for (let p of progressBar) {
+        let w = p.parentElement.querySelector(".ep-watch-count");
+        p.value = w.textContent;
+    }
 }
