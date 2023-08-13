@@ -86,6 +86,11 @@ function CreateCard(title, image, status, num, score, year) {
     newCard.append(newScore);
 
     const newDate = document.createElement("p");
+
+    // Just in case the database doesn't have the date.
+    if (year) {
+        year = year.slice(0, 4);
+    }
     newDate.textContent = year;
     newCard.append(newDate);
 
