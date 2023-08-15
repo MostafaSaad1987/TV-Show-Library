@@ -20,7 +20,7 @@ h6 {
     color: rgb(200, 200, 200);
 }
 
-.header {
+header {
     background-color: #272343;
     width: 100%;
     text-align: center;
@@ -128,4 +128,16 @@ h6 {
     position: absolute;
     bottom: 2px;
     left: 30%;
+}
+
+#search-results {
+    position: absolute;
+    z-index: 100;
+    width: 30.5vw;
+}
+
+@media (max-width:580px) {
+    #container {
+        width: auto;
+    }
 }
