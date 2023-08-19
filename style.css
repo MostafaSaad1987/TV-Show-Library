@@ -106,8 +106,8 @@ header {
 
 .increase {
     position: absolute;
-    bottom: 2px;
-    right: 30%;
+    bottom: 1px;
+    right: 1px;
 
     background-color: #36f43f;
     border-radius: 3px;
@@ -118,6 +118,7 @@ header {
     font-size: 16px;
     transition-duration: 0.4s;
     cursor: pointer;
+    padding: 8px 13px;
 }
 
 .increase:hover {
@@ -125,9 +126,10 @@ header {
 }
 
 .decrease {
+    padding: 8px 16px;
     position: absolute;
-    bottom: 2px;
-    left: 30%;
+    bottom: 1px;
+    left: 1px;
 }
 
 #search-results {
@@ -139,5 +141,10 @@ header {
 @media (max-width:580px) {
     #container {
         width: auto;
+    }
+
+    .remove-button-img {
+        height: 18px;
+        width: 18px;
     }
 }

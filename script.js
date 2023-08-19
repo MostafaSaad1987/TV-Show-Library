@@ -61,7 +61,7 @@ function CreateCard(title, image, status, num, score, year) {
 
     const removeButton = document.createElement("button");
     removeButton.classList.add("remove-button");
-    removeButton.innerText = "Remove";
+    removeButton.innerHTML = '<img class="remove-button-img" src="images/Trashcan.svg" alt="Trash icon" height="25" width="25" />';
     newCard.append(removeButton);
 
     const newTitle = document.createElement("p");
@@ -161,6 +161,10 @@ document.body.addEventListener("click", (e) => {
 
     if (e.target.classList.contains("remove-button")) {
         e.target.parentElement.remove();
+    }
+
+    if (e.target.classList.contains("remove-button-img")) {
+        e.target.parentElement.parentElement.remove();
     }
 
     if (e.target.classList.contains("increase")) {
